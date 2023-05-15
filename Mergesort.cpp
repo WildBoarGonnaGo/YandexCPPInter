@@ -15,12 +15,12 @@
 using namespace std;
 
 class MergeSort {
-    vector<int> aux;
-    void merge(vector<int> &s, int &lo, int &mid, int &hi) {
+    void merge(vector<int> &s, vector<int> &aux, int &lo, int &mid, int &hi) {
         int i, k, j;
-        
-        for (i = lo; i <= hi; ++i)
-            aux[i] = s[i];
+
+		for (i = lo; i <= hi; ++i)
+			aux[i] = s[i];
+
         i = lo; j = mid + 1;
         for (k = lo; k <= hi; ++k) {
             if (i > mid) s[k] = aux[j++];
@@ -29,17 +29,18 @@ class MergeSort {
             else s[k] = aux[i++];
         }
     }
-    void sort(vector<int> &s, int lo, int hi) {
+    void sort(vector<int> &s, vector<int> &aux, int lo, int hi) {
         if (hi <= lo) return ;
         int mid = lo + (hi - lo) / 2;
-        sort(s, lo, mid);
-        sort(s, mid + 1, hi);
-        merge(s, lo, mid, hi);
+        sort(s, aux, lo, mid);
+        sort(s, aux, mid + 1, hi);
+		if (s[mid] < s[mid + 1]) return ;
+        merge(s, aux, lo, mid, hi);
     }
 public:
     MergeSort(vector<int> &s) {
-        aux = vector<int>(s.size());
-        sort(s, 0, s.size() - 1);
+		vector<int> aux(s.size());
+        sort(s, aux, 0, s.size() - 1);
     }
 };
 
