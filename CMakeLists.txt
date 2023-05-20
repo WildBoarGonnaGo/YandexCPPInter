@@ -4,4 +4,4 @@ project(inter)
 set(CMAKE_CXX_STANDARD 17)
 add_compile_options(-g)
 
-add_executable(${PROJECT_NAME} Quicksort.cpp)
+add_executable(${PROJECT_NAME} MedianTwoSortedArrays.cpp)
